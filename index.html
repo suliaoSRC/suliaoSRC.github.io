@@ -84,7 +84,7 @@
     <div class="container mx-auto px-4 py-5 sm:max-w-4xl md:max-w-5xl lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl">
         <!-- 标题区域 -->
         <header class="text-center mb-4">
-            <h1 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800 mb-2">定案词条点选系统V0.22</h1>
+            <h1 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800 mb-2">定案词条点选系统V0.23</h1>
             <p class="text-neutral text-sm">选择工序步骤，生成对应文字并一键复制</p>
         </header>
         
@@ -97,6 +97,7 @@
                 <button class="preset-btn" data-preset="yangpiao40">40℃氧漂</button>
                 <button class="preset-btn" data-preset="zhizun40">40℃至尊</button>
                 <button class="preset-btn" data-preset="zhizun30">30℃至尊</button>
+                <button class="preset-btn" data-preset="wuroushun30">30℃无柔顺</button>
                 <button class="preset-btn" data-preset="kuaixi">快洗</button>
                 
                 <!-- 黄色系预设按钮 -->
@@ -226,6 +227,7 @@
                     { value: "40℃至尊", fullName: "（40℃至尊）工业水洗机13号程序（15kg水洗机+10泵至尊）", isExclusive: true },
                     { value: "40℃氧漂", fullName: "（40℃氧漂）工业水洗机14号程序（15kg水洗机+10泵至尊+10包彩漂粉）", isExclusive: true },
                     { value: "30℃至尊", fullName: "工业水洗机10号程序", isExclusive: true },
+                    { value: "9#", fullName: "工业水洗机9号程序", isExclusive: true },
                     { value: "快洗", fullName: "家用机快洗程序", isExclusive: true },
                     { value: "快洗P3", fullName: "家用机快洗程序(P-3)", isExclusive: true },
                     { value: "40℃机洗", fullName: "工业水洗机1号程序", isExclusive: true },
@@ -296,6 +298,7 @@
             "yangpiao40": ["测试","40℃氧漂"],
             "zhizun40": ["测试","40℃至尊"],
             "zhizun30": ["30℃至尊", "烘房悬挂", "蒸烫"],
+            "wuroushun30": ["9#", "烘房悬挂", "蒸烫"], 
             "kuaixi": ["快洗", "薰衣草","烘房悬挂", "蒸烫"],
             "silvyixi": ["四氯乙烯", "蒸烫"],
             "xiku": ["翻面", "四氯乙烯", "蒸烫","裤线"],
