@@ -84,7 +84,7 @@
     <div class="container mx-auto px-4 py-5 sm:max-w-4xl md:max-w-5xl lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl">
         <!-- 标题区域 -->
         <header class="text-center mb-4">
-            <h1 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800 mb-2">定案词条点选系统V0.21</h1>
+            <h1 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800 mb-2">定案词条点选系统V0.22</h1>
             <p class="text-neutral text-sm">选择工序步骤，生成对应文字并一键复制</p>
         </header>
         
@@ -114,7 +114,8 @@
                 <!-- 快速文本预设按钮 -->
                 <button class="preset-btn" data-quick-text="zhujiang-workwear">珠江工衣</button>
                 <button class="preset-btn" data-quick-text="yellow-tablecloth">黄色台布</button>
-                <button class="preset-btn" data-preset="bucao">布草</button>
+                <button class="preset-btn" data-preset="bucao">布草常规</button>
+                <button class="preset-btn" data-preset="bucaoyang">布草氧漂</button>
             </div>
         </div>
         
@@ -233,6 +234,7 @@
                     { value: "40℃羽绒服洗", fullName: "工业水洗机28号程序", isExclusive: true },
                     { value: "30℃羽绒服洗", fullName: "工业水洗机16号程序", isExclusive: true },
                     { value: "海狮10", fullName: "海狮工业水洗机10号程序", isExclusive: true },
+                    { value: "海狮11", fullName: "海狮工业水洗机11号程序", isExclusive: true },
                     { value: "湿洗3号", fullName: "伊莱克斯湿洗机-真丝套件程序洗涤", isExclusive: true },
                     { value: "湿洗5号", fullName: "伊莱克斯湿洗机5号程序（蚕丝芯）", isExclusive: true },
                     { value: "四氯乙烯", fullName: "四氯乙烯1号程序", specialStyle: "dark-yellow-border", isExclusive: true },
@@ -303,7 +305,8 @@
             "down45": ["保护拉绳", "保护拉链", "1号预涂", "45℃羽绒服洗", "羽绒服干燥"],
             "down40": ["保护拉绳", "保护拉链", "1号预涂", "40℃羽绒服洗", "羽绒服干燥"],
             "down30": ["保护拉绳", "保护拉链", "1号预涂", "30℃羽绒服洗", "羽绒服干燥"],
-            "bucao": ["海狮10", "烘干机1#", "蒸烫"]
+            "bucao": ["海狮10", "烘干机1#", "蒸烫"],
+            "bucaoyang": ["海狮11", "烘干机1#", "蒸烫"]
         };
 
         // 快速文本预设
