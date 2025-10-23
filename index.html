@@ -84,7 +84,7 @@
     <div class="container mx-auto px-4 py-5 sm:max-w-4xl md:max-w-5xl lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl">
         <!-- 标题区域 -->
         <header class="text-center mb-4">
-            <h1 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800 mb-2">定案词条点选系统V0.24</h1>
+            <h1 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800 mb-2">定案词条点选系统V0.25</h1>
             <p class="text-neutral text-sm">选择工序步骤，生成对应文字并一键复制</p>
         </header>
         
@@ -115,6 +115,7 @@
                 <!-- 快速文本预设按钮 -->
                 <button class="preset-btn" data-quick-text="zhujiang-workwear">珠江工衣</button>
                 <button class="preset-btn" data-quick-text="yellow-tablecloth">黄色台布</button>
+                <button class="preset-btn" data-quick-text="yujin">2C浴巾</button>
                 <button class="preset-btn" data-preset="bucao">布草常规</button>
                 <button class="preset-btn" data-preset="bucaoyang">布草氧漂</button>
             </div>
@@ -208,7 +209,7 @@
                     { value: "至尊浸泡", fullName: "至尊稀释液整体浸泡【15min】" },
                     { value: "水溶性污渍", fullName: "蒸汽吹水溶性污渍", specialStyle: "dark-yellow-border" },
                     { value: "清水刷", fullName: "清水刷涂抹处，漂洗干净", specialStyle: "dark-yellow-border" },
-                    { value: "干洗预涂", fullName: "干洗预涂液涂【】", specialStyle: "dark-yellow-border" }
+                    { value: "干洗预涂", fullName: "干洗预涂液涂【】，放置10min", specialStyle: "dark-yellow-border" }
                 ]
             },
             {
@@ -316,7 +317,8 @@
         // 快速文本预设
         const quickTexts = {
             "zhujiang-workwear": "工业水洗机12号程序（注：不可用⑦号工业机），烘干机1号程序，蒸烫",
-            "yellow-tablecloth": "工业水洗机4号程序。烘干机1号程序，单滚熨烫+熨烫台修褶皱"
+            "yellow-tablecloth": "工业水洗机4号程序。烘干机1号程序，单滚熨烫+熨烫台修褶皱",
+            "yujin": "洗前测量蓬松度和尺寸。神器涂黄渍部位，放置5分钟，搓洗，用2升60度的热水+1包蓝色月光色渍净+1泵除菌去味至尊整体浸泡1小时。使用标准洗（漂洗次数4次）+1/4瓶盖薰衣草香柔顺剂。 滚筒烘干机5号程序干燥（60度热风40分钟+5分钟冷风） 按需修饰钱头、毛球等。绒面夹机蒸烫(蒸烫过程嗅闻检查有无异味或洗涤剂残留味道，如有联系产线长处理）熨烫后放烘房悬挂散潮30分钟（散潮时间不低于10分钟）复核蓬松度后终检 终检后平铺包装桌面1小时（平铺放置时间不低于1小时） 折叠包装出库"
         };
 
         // 选中项存储
