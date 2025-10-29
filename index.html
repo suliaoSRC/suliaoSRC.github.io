@@ -84,7 +84,7 @@
     <div class="container mx-auto px-4 py-5 sm:max-w-4xl md:max-w-5xl lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl">
         <!-- 标题区域 -->
         <header class="text-center mb-4">
-            <h1 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800 mb-2">定案词条点选系统V0.25</h1>
+            <h1 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800 mb-2">定案词条点选系统V0.26</h1>
             <p class="text-neutral text-sm">选择工序步骤，生成对应文字并一键复制</p>
         </header>
         
@@ -185,7 +185,6 @@
                     { value: "拆皮饰", fullName: "拆卸皮饰" },
                     { value: "魔术贴", fullName: "贴好魔术贴" },
                     { value: "进机前包裹纽扣", fullName: "进机前包裹纽扣" },
-                    { value: "测试", fullName: "工艺测试" }
                 ]
             },
             {
@@ -204,7 +203,7 @@
                     { value: "刷局部", fullName: "至尊稀释液软毛刷洗污渍处" },
                     { value: "皂液", fullName: "皂液涂【】" },
                     { value: "1号预涂", fullName: "1号预涂液整体涂" },
-                    { value: "T1液体胶笔渍", fullName: "笔渍使用targo+液体胶+皂液轻刮" },
+                    { value: "T1笔渍", fullName: "T1和神器和去笔渍剂涂笔渍，至尊稀释液刷和揉搓笔渍处" },
                     { value: "去血渍", fullName: "去血渍剂2号浸泡血渍部位，放置30min" },
                     { value: "至尊浸泡", fullName: "至尊稀释液整体浸泡【15min】" },
                     { value: "水溶性污渍", fullName: "蒸汽吹水溶性污渍", specialStyle: "dark-yellow-border" },
@@ -296,22 +295,22 @@
 
         // 程序预设方案
         const presets = {
-            "yangpiao60": ["60℃氧漂", "湿烫", "袖线"],
-            "yangpiao40": ["测试","40℃氧漂"],
-            "zhizun40": ["测试","40℃至尊"],
-            "zhizun30": ["30℃至尊", "烘房悬挂", "蒸烫"],
-            "wuroushun30": ["9#", "烘房悬挂", "蒸烫"], 
-            "kuaixi": ["快洗", "薰衣草","烘房悬挂", "蒸烫"],
-            "silvyixi": ["四氯乙烯", "蒸烫"],
-            "xiku": ["翻面", "四氯乙烯", "蒸烫","裤线"],
-            "tanqing": ["水溶性污渍", "翻面", "细网袋", "碳氢", "蒸烫"],
-            "guiji": ["细网袋", "硅基", "蒸烫"],
-            "dabo60": ["60℃氧漂", "烘干机1#", "蒸烫"],
+            "yangpiao60": ["60℃氧漂"],
+            "yangpiao40": ["40℃氧漂"],
+            "zhizun40": ["40℃至尊"],
+            "zhizun30": ["30℃至尊", "烘房悬挂"],
+            "wuroushun30": ["9#", "烘房悬挂"], 
+            "kuaixi": ["快洗", "薰衣草","烘房悬挂"],
+            "silvyixi": ["四氯乙烯"],
+            "xiku": ["翻面", "四氯乙烯"],
+            "tanqing": ["水溶性污渍", "翻面", "细网袋", "碳氢"],
+            "guiji": ["细网袋", "硅基"],
+            "dabo60": ["60℃氧漂", "烘干机1#"],
             "down45": ["保护拉绳", "保护拉链", "1号预涂", "45℃羽绒服洗", "羽绒服干燥"],
             "down40": ["保护拉绳", "保护拉链", "1号预涂", "40℃羽绒服洗", "羽绒服干燥"],
             "down30": ["保护拉绳", "保护拉链", "1号预涂", "30℃羽绒服洗", "羽绒服干燥"],
-            "bucao": ["海狮10", "烘干机1#", "蒸烫"],
-            "bucaoyang": ["海狮11", "烘干机1#", "蒸烫"]
+            "bucao": ["海狮10", "烘干机1#"],
+            "bucaoyang": ["海狮11", "烘干机1#"]
         };
 
         // 快速文本预设
