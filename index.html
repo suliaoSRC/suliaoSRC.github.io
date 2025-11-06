@@ -84,7 +84,7 @@
     <div class="container mx-auto px-4 py-5 sm:max-w-4xl md:max-w-5xl lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl">
         <!-- 标题区域 -->
         <header class="text-center mb-4">
-            <h1 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800 mb-2">定案词条点选系统V0.26</h1>
+            <h1 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800 mb-2">定案词条点选系统V0.27</h1>
             <p class="text-neutral text-sm">蒸烫湿烫和衬衣的袖线西裤的裤线不用写了</p>
         </header>
         
@@ -98,6 +98,7 @@
                 <button class="preset-btn" data-preset="zhizun40">40℃至尊</button>
                 <button class="preset-btn" data-preset="zhizun30">30℃至尊</button>
                 <button class="preset-btn" data-preset="wuroushun30">30℃无柔顺</button>
+                <button class="preset-btn" data-preset="chongfengyi">冲锋衣</button>
                 <button class="preset-btn" data-preset="kuaixi">快洗</button>
                 
                 <!-- 黄色系预设按钮 -->
@@ -245,7 +246,8 @@
                     { value: "碳氢", fullName: "碳氢1号程序", specialStyle: "dark-yellow-border", isExclusive: true },
                     { value: "硅基", fullName: "硅基1号程序", specialStyle: "dark-yellow-border", isExclusive: true },
                     { value: "褪色单机洗", fullName: "褪色注意单独洗" },
-                    { value: "凑机", fullName: "【凑机】" }
+                    { value: "凑机", fullName: "【凑机】" },
+                    { value: "测试", fullName: "工艺测试" }
                 ]
             },
             {
@@ -298,8 +300,9 @@
             "yangpiao60": ["60℃氧漂"],
             "yangpiao40": ["40℃氧漂"],
             "zhizun40": ["40℃至尊"],
-            "zhizun30": ["30℃至尊", "烘房悬挂"],
+            "zhizun30": ["测试", "30℃至尊", "烘房悬挂"],
             "wuroushun30": ["9#", "烘房悬挂"], 
+            "chongfengyi": ["9#", "烘房悬挂"],
             "kuaixi": ["快洗", "薰衣草","烘房悬挂"],
             "silvyixi": ["四氯乙烯"],
             "xiku": ["翻面", "四氯乙烯"],
