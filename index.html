@@ -84,7 +84,7 @@
     <div class="container mx-auto px-4 py-5 sm:max-w-4xl md:max-w-5xl lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl">
         <!-- 标题区域 -->
         <header class="text-center mb-4">
-            <h1 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800 mb-2">定案词条点选系统V0.28</h1>
+            <h1 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800 mb-2">定案词条点选系统V0.30</h1>
             <p class="text-neutral text-sm">蒸烫湿烫和衬衣的袖线西裤的裤线不用写了</p>
         </header>
         
@@ -199,12 +199,12 @@
                     { value: "避深色", fullName: "避开深色部位" },
                     { value: "神器试色", fullName: "神器试色" }, 
                     { value: "喷涂剂试色", fullName: "喷涂剂试色2h" },
-                    { value: "放不超过30min", fullName: "放置不超过30min" },
-                    { value: "放置不超过4h", fullName: "放置不超过4h" },
+                    { value: "放不超0.5h", fullName: "放置不超过30min" },
+                    { value: "放不超4h", fullName: "放置不超过4h" },
                     { value: "刷整体", fullName: "至尊稀释液整体刷洗" },
                     { value: "刷局部", fullName: "至尊稀释液刷洗污渍处" },
                     { value: "皂液", fullName: "皂液涂【】" },
-                    { value: "1号预涂", fullName: "1号预涂液整体涂" },
+                    { value: "1号预涂", fullName: "1号预涂液整体涂，放置1h" },
                     { value: "T1笔渍", fullName: "T1和神器和去笔渍剂涂笔渍，至尊稀释液刷和揉搓笔渍处" },
                     { value: "去血渍", fullName: "去血渍剂2号浸泡血渍部位，放置30min" },
                     { value: "至尊浸泡", fullName: "至尊稀释液整体浸泡【15min】" },
@@ -238,8 +238,6 @@
                     { value: "45℃羽绒服洗", fullName: "工业水洗机29号程序", isExclusive: true },
                     { value: "40℃羽绒服洗", fullName: "工业水洗机28号程序", isExclusive: true },
                     { value: "30℃羽绒服洗", fullName: "工业水洗机16号程序", isExclusive: true },
-                    { value: "海狮10", fullName: "海狮工业水洗机10号程序", isExclusive: true },
-                    { value: "海狮11", fullName: "海狮工业水洗机11号程序", isExclusive: true },
                     { value: "湿洗3号", fullName: "伊莱克斯湿洗机-真丝套件程序洗涤", isExclusive: true },
                     { value: "湿洗5号", fullName: "伊莱克斯湿洗机5号程序（蚕丝芯）", isExclusive: true },
                     { value: "四氯乙烯", fullName: "四氯乙烯1号程序", specialStyle: "dark-yellow-border", isExclusive: true },
@@ -248,6 +246,7 @@
                     { value: "硅基", fullName: "硅基1号程序", specialStyle: "dark-yellow-border", isExclusive: true },
                     { value: "褪色单机洗", fullName: "褪色注意单独洗" },
                     { value: "凑机", fullName: "【凑机】" },
+                    { value: "不彩漂", fullName: "（不加彩漂粉）" },
                     { value: "测试", fullName: "工艺测试" }
                 ]
             },
@@ -269,6 +268,7 @@
                     { value: "人像机干", fullName: "人像机干燥" },
                     { value: "吹裤机干燥", fullName: "吹裤机干燥" },
                     { value: "烘干机1#", fullName: "烘干机1号程序" },
+                    { value: "烘干机5#", fullName: "烘干机5号程序" },
                     { value: "羽绒服干燥", fullName: "烘干机2号程序+烘房悬挂，如有皱褶蒸烫" }
                 ]
             },
@@ -313,8 +313,8 @@
             "down45": ["保护拉绳", "保护拉链", "1号预涂", "45℃羽绒服洗", "羽绒服干燥"],
             "down40": ["保护拉绳", "保护拉链", "1号预涂", "40℃羽绒服洗", "羽绒服干燥"],
             "down30": ["保护拉绳", "保护拉链", "1号预涂", "30℃羽绒服洗", "羽绒服干燥"],
-            "bucao": ["海狮10", "烘干机1#"],
-            "bucaoyang": ["海狮11", "烘干机1#"]
+            "bucao": ["60℃氧漂", "烘干机5#"],
+            "bucaoyang": ["60℃氧漂","不彩漂", "烘干机5#"]
         };
 
         // 快速文本预设
