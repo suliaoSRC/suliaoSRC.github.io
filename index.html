@@ -84,7 +84,7 @@
     <div class="container mx-auto px-4 py-5 sm:max-w-4xl md:max-w-5xl lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl">
         <!-- 标题区域 -->
         <header class="text-center mb-4">
-            <h1 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800 mb-2">定案词条点选系统V0.34</h1>
+            <h1 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800 mb-2">定案词条点选系统V0.35</h1>
             <p class="text-neutral text-sm">蒸烫湿烫和衬衣的袖线西裤的裤线不用写了</p>
         </header>
         
@@ -104,6 +104,8 @@
                 <!-- 黄色系预设按钮 -->
                 <button class="yellow-preset-btn" data-preset="silvyixi">四氯乙烯</button>
                 <button class="yellow-preset-btn" data-preset="xiku">西裤</button>
+                <button class="yellow-preset-btn" data-preset="ganxiqian">干洗前去渍</button>
+                <button class="yellow-preset-btn" data-preset="ganxiqianfan">干洗前去渍翻面</button>
                 <button class="yellow-preset-btn" data-preset="tanqing">碳氢</button>
                 <button class="yellow-preset-btn" data-preset="guiji">硅基</button>
                 
@@ -209,9 +211,7 @@
                     { value: "T1笔渍", fullName: "T1和神器和去笔渍剂涂笔渍，至尊稀释液刷和揉搓笔渍处" },
                     { value: "去血渍", fullName: "去血渍剂2号浸泡血渍部位，放置30min" },
                     { value: "至尊浸泡", fullName: "至尊稀释液整体浸泡【15min】" },
-                    { value: "水溶性污渍", fullName: "蒸汽吹水溶性污渍", specialStyle: "dark-yellow-border" },
-                    { value: "清水刷", fullName: "清水刷涂抹处，漂洗干净", specialStyle: "dark-yellow-border" },
-                    { value: "干洗预涂", fullName: "干洗预涂液涂【】，放置10min", specialStyle: "dark-yellow-border" }
+                    { value: "干洗前去渍", fullName: "干洗前去渍", specialStyle: "dark-yellow-border" }
                 ]
             },
             {
@@ -313,6 +313,8 @@
             "kuaixi": ["快洗", "薰衣草","烘房悬挂"],
             "silvyixi": ["四氯乙烯"],
             "xiku": ["翻面", "四氯乙烯"],
+            "ganxiqian": ["干洗前去渍","四氯乙烯"],
+            "ganxiqianfan": ["干洗前去渍","翻面","四氯乙烯"],
             "tanqing": ["水溶性污渍", "翻面", "细网袋", "碳氢"],
             "guiji": ["细网袋", "硅基"],
             "dabo60": ["60℃氧漂", "烘干机1#"],
