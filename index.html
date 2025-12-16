@@ -21,6 +21,12 @@
                             light: '#FEF3C7',
                             DEFAULT: '#EAB308',
                             dark: '#B45309'
+                        },
+                        // 新增蓝绿色系
+                        teal: {
+                            light: '#CCFBF1',
+                            DEFAULT: '#14B8A6',
+                            dark: '#0F766E'
                         }
                     },
                     fontFamily: {
@@ -51,8 +57,19 @@
             .yellow-preset-btn {
                 @apply bg-yellow-light hover:bg-yellow text-yellow-dark py-2 px-4 rounded-lg font-medium btn-hover text-sm;
             }
+            /* 新增蓝绿色预设按钮样式 */
+            .teal-preset-btn {
+                @apply bg-teal-light hover:bg-teal text-teal-dark py-2 px-4 rounded-lg font-medium btn-hover text-sm;
+            }
             .process-btn {
                 @apply px-3 py-2 border border-gray-300 rounded-lg text-sm hover:border-primary btn-hover transition-all duration-200;
+            }
+            /* 新增蓝绿色工序按钮样式 */
+            .teal-border-btn {
+                @apply px-3 py-2 border border-teal rounded-lg text-sm hover:border-teal-dark btn-hover transition-all duration-200 text-teal-dark;
+            }
+            .teal-border-btn.selected-btn {
+                @apply bg-teal text-white border-teal;
             }
             .dark-yellow-border-btn {
                 @apply px-3 py-2 border border-yellow-dark rounded-lg text-sm hover:border-yellow btn-hover transition-all duration-200;
@@ -84,7 +101,7 @@
     <div class="container mx-auto px-4 py-5 max-w-[100%] lg:max-w-[95%] xl:max-w-[90%]">
         <!-- 标题区域 -->
         <header class="text-center mb-4">
-            <h1 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800 mb-2">定案词条点选系统V0.39</h1>
+            <h1 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800 mb-2">定案词条点选系统V0.40</h1>
             <p class="text-neutral text-sm">蒸烫湿烫和衬衣的袖线西裤的裤线不用写了</p>
         </header>
         
@@ -109,12 +126,12 @@
                 <button class="yellow-preset-btn" data-preset="tanqing">碳氢</button>
                 <button class="yellow-preset-btn" data-preset="guiji">硅基</button>
                 
-                <!-- 羽绒服预设按钮 -->
-                <button class="preset-btn" data-preset="yu40">羽绒40-测</button>
-                <button class="preset-btn" data-preset="yu30">羽绒30-测</button>
-                <button class="preset-btn" data-preset="down45">羽绒服45℃</button>
-                <button class="preset-btn" data-preset="down40">羽绒服40℃</button>
-                <button class="preset-btn" data-preset="down30">羽绒服30℃</button>
+                <!-- 蓝绿色系羽绒预设按钮 -->
+                <button class="teal-preset-btn" data-preset="yu40">羽绒40-测</button>
+                <button class="teal-preset-btn" data-preset="yu30">羽绒30-测</button>
+                <button class="teal-preset-btn" data-preset="down45">羽绒服45℃</button>
+                <button class="teal-preset-btn" data-preset="down40">羽绒服40℃</button>
+                <button class="teal-preset-btn" data-preset="down30">羽绒服30℃</button>
                 <button class="preset-btn" data-preset="dabo60">达播氧漂</button>
                 
                 <!-- 快速文本预设按钮 -->
@@ -246,13 +263,13 @@
                     { value: "9#", fullName: "工业水洗机9号程序", isExclusive: true },
                     { value: "快洗", fullName: "家用机快洗程序", isExclusive: true },
                     { value: "快洗P3", fullName: "家用机快洗程序(P-3)", isExclusive: true },
-                    { value: "家用羽绒40", fullName: "家用机羽绒服40℃程序", isExclusive: true },
-                    { value: "家用羽绒30", fullName: "家用机羽绒服30℃程序", isExclusive: true },
-                    { value: "40羽绒测", fullName: "工业水洗机3号程序（羽绒服40℃测试）", isExclusive: true },
-                    { value: "30羽绒测", fullName: "工业水洗机15号程序（羽绒服30℃测试）", isExclusive: true },
-                    { value: "45℃羽绒服洗", fullName: "工业水洗机29号程序", isExclusive: true },
-                    { value: "40℃羽绒服洗", fullName: "工业水洗机28号程序", isExclusive: true },
-                    { value: "30℃羽绒服洗", fullName: "工业水洗机16号程序", isExclusive: true },
+                    { value: "家用羽绒40", fullName: "家用机羽绒服40℃程序", isExclusive: true, specialStyle: "teal-border" },
+                    { value: "家用羽绒30", fullName: "家用机羽绒服30℃程序", isExclusive: true, specialStyle: "teal-border" },
+                    { value: "40羽绒测", fullName: "工业水洗机3号程序（羽绒服40℃测试）", isExclusive: true, specialStyle: "teal-border" },
+                    { value: "30羽绒测", fullName: "工业水洗机15号程序（羽绒服30℃测试）", isExclusive: true, specialStyle: "teal-border" },
+                    { value: "45℃羽绒服洗", fullName: "工业水洗机29号程序", isExclusive: true, specialStyle: "teal-border" },
+                    { value: "40℃羽绒服洗", fullName: "工业水洗机28号程序", isExclusive: true, specialStyle: "teal-border" },
+                    { value: "30℃羽绒服洗", fullName: "工业水洗机16号程序", isExclusive: true, specialStyle: "teal-border" },
                     { value: "湿洗3号", fullName: "伊莱克斯湿洗机-真丝套件程序洗涤", isExclusive: true },
                     { value: "湿洗5号", fullName: "伊莱克斯湿洗机5号程序（蚕丝芯）", isExclusive: true },
                     { value: "四氯乙烯", fullName: "四氯乙烯1号程序", specialStyle: "dark-yellow-border", isExclusive: true },
@@ -269,7 +286,8 @@
                     { value: "窗纱氧漂24", fullName: "工业水洗机24号程序", isExclusive: true },                    
                     { value: "褪色单机洗", fullName: "褪色注意单独洗" },
                     { value: "凑机", fullName: "【凑机】" },
-                    { value: "测试", fullName: "工艺测试" }
+                    { value: "测试", fullName: "工艺测试" },
+                    { value: "配件手洗", fullName: "配件手洗" }
                 ]
             },
             {
@@ -420,6 +438,8 @@
                     // 应用特殊样式
                     if (item.specialStyle === "dark-yellow-border") {
                         btn.className = 'dark-yellow-border-btn';
+                    } else if (item.specialStyle === "teal-border") {
+                        btn.className = 'teal-border-btn';
                     } else if (item.isStain) {
                         btn.className = 'stain-btn';
                     } else {
@@ -484,6 +504,8 @@
                 if (idx === -1) {
                     selectedItems[category].push(value);
                     if (btn.dataset.specialStyle === "dark-yellow-border") {
+                        btn.classList.add('selected-btn');
+                    } else if (btn.dataset.specialStyle === "teal-border") {
                         btn.classList.add('selected-btn');
                     } else {
                         btn.classList.add('selected-btn');
@@ -624,7 +646,7 @@
             }
         }
 
-        // 更新结果文本 - 修复部位重复显示问题，并添加前缀功能
+        // 更新结果文本 - 修改核心逻辑：将配件手洗提取到文本末尾
         function updateResult() {
             if (resultText.dataset.quickText) return;
             
@@ -642,7 +664,8 @@
             });
             hasStains = stains.length > 0;
             
-            // 2. 处理其他类别（严格按顺序）
+            // 2. 处理其他类别（严格按顺序），并提取配件手洗
+            let peijianShouxi = ""; // 存储配件手洗内容
             categoryOrder.forEach(category => {
                 const items = [];
                 selectedItems[category].forEach(selectedValue => {
@@ -655,7 +678,12 @@
                             fullName = fullName.replace("【】", `【${stains.join('、')}】`);
                         }
                         
-                        items.push(fullName);
+                        // 如果是配件手洗，单独存储，不加入当前类别
+                        if (selectedValue === "配件手洗") {
+                            peijianShouxi = fullName;
+                        } else {
+                            items.push(fullName);
+                        }
                     }
                 });
                 categoryContents[category] = items.join('，');
@@ -670,7 +698,12 @@
             });
             let newContent = fullContent.join('，');
             
-            // 4. 添加前缀（主体/内胆）
+            // 4. 将配件手洗添加到文本最后
+            if (peijianShouxi) {
+                newContent = newContent ? `${newContent}，${peijianShouxi}` : peijianShouxi;
+            }
+            
+            // 5. 添加前缀（主体/内胆）
             if (currentPrefix && newContent) {
                 newContent = `${currentPrefix}：${newContent}`;
             }
@@ -768,7 +801,7 @@
             });
 
             // 预设按钮事件
-            document.querySelectorAll('.preset-btn[data-preset], .yellow-preset-btn[data-preset]').forEach(btn => {
+            document.querySelectorAll('.preset-btn[data-preset], .yellow-preset-btn[data-preset], .teal-preset-btn[data-preset]').forEach(btn => {
                 btn.addEventListener('click', () => {
                     applyPreset(btn.dataset.preset);
                 });
@@ -808,4 +841,3 @@
     </script>
 </body>
 </html>
-    
