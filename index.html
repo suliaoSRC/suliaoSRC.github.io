@@ -561,6 +561,20 @@
             }, 2000);
         }
 
+        // 重置前缀选择状态（主体/内胆）
+        function resetPrefixSelection() {
+            currentPrefix = '';
+            // 重置主体按钮样式
+            mainBodyBtn.classList.remove('bg-primary', 'text-white');
+            mainBodyBtn.classList.add('bg-gray-100', 'text-gray-700');
+            mainBodyBtn.innerHTML = '<i class="fa fa-square-o mr-1"></i> 主体';
+            
+            // 重置内胆按钮样式
+            innerLiningBtn.classList.remove('bg-primary', 'text-white');
+            innerLiningBtn.classList.add('bg-gray-100', 'text-gray-700');
+            innerLiningBtn.innerHTML = '<i class="fa fa-square-o mr-1"></i> 内胆';
+        }
+
         // 清空所有选择
         function clearAll() {
             processes.forEach(process => {
@@ -569,6 +583,10 @@
                 const buttons = document.querySelectorAll(`button[data-category="${process.category}"]`);
                 buttons.forEach(button => button.classList.remove('selected-btn'));
             });
+            
+            // 重置主体/内胆选择状态
+            resetPrefixSelection();
+            
             updateResult();
         }
 
