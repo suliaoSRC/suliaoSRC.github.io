@@ -81,10 +81,10 @@
 </head>
 <body class="bg-gray-50 font-inter text-gray-800 min-h-screen">
     <!-- 响应式容器 -->
-    <div class="container mx-auto px-4 py-5 sm:max-w-4xl md:max-w-5xl lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl">
+    <div class="container mx-auto px-4 py-5 max-w-[100%] lg:max-w-[95%] xl:max-w-[90%]">
         <!-- 标题区域 -->
         <header class="text-center mb-4">
-            <h1 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800 mb-2">定案词条点选系统V0.38</h1>
+            <h1 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800 mb-2">定案词条点选系统V0.39</h1>
             <p class="text-neutral text-sm">蒸烫湿烫和衬衣的袖线西裤的裤线不用写了</p>
         </header>
         
@@ -152,12 +152,22 @@
                         </div>
                     </div>
                     
-                    <div class="flex gap-2">
+                    <div class="flex gap-2 mb-2">
                         <button id="copyBtn" class="flex-1 bg-primary hover:bg-primary/90 text-white py-2 px-3 rounded-lg font-medium btn-hover flex items-center justify-center text-sm disabled:opacity-50 disabled:cursor-not-allowed" disabled>
                             <i class="fa fa-copy mr-1"></i> 复制
                         </button>
                         <button id="clearBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 px-3 rounded-lg font-medium btn-hover flex items-center justify-center text-sm disabled:opacity-50 disabled:cursor-not-allowed" disabled>
                             <i class="fa fa-trash mr-1"></i> 清空
+                        </button>
+                    </div>
+                    
+                    <!-- 新增主体/内胆选择按钮 -->
+                    <div class="flex gap-2 mb-2">
+                        <button id="mainBodyBtn" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-3 rounded-lg font-medium btn-hover flex items-center justify-center text-sm transition-all duration-200">
+                            <i class="fa fa-square-o mr-1"></i> 主体
+                        </button>
+                        <button id="innerLiningBtn" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-3 rounded-lg font-medium btn-hover flex items-center justify-center text-sm transition-all duration-200">
+                            <i class="fa fa-square-o mr-1"></i> 内胆
                         </button>
                     </div>
                     
@@ -359,6 +369,11 @@
         const copyMessage = document.getElementById('copyMessage');
         const charCount = document.getElementById('charCount');
         const editTip = document.getElementById('editTip');
+        const mainBodyBtn = document.getElementById('mainBodyBtn');
+        const innerLiningBtn = document.getElementById('innerLiningBtn');
+        
+        // 存储当前选择的前缀类型
+        let currentPrefix = '';
 
         // 初始化
         init();
@@ -591,7 +606,7 @@
             }
         }
 
-        // 更新结果文本 - 修复部位重复显示问题
+        // 更新结果文本 - 修复部位重复显示问题，并添加前缀功能
         function updateResult() {
             if (resultText.dataset.quickText) return;
             
@@ -635,7 +650,12 @@
                     fullContent.push(categoryContents[category]);
                 }
             });
-            const newContent = fullContent.join('，');
+            let newContent = fullContent.join('，');
+            
+            // 4. 添加前缀（主体/内胆）
+            if (currentPrefix && newContent) {
+                newContent = `${currentPrefix}：${newContent}`;
+            }
             
             // 无论是否有编辑，都按新的工序顺序重新生成内容
             resultText.value = newContent;
@@ -657,6 +677,55 @@
             }
         }
 
+        // 绑定前缀按钮事件
+        function bindPrefixButtons() {
+            mainBodyBtn.addEventListener('click', () => {
+                // 切换主体按钮状态
+                if (currentPrefix === '主体') {
+                    // 如果已选中主体，则取消选择
+                    currentPrefix = '';
+                    mainBodyBtn.classList.remove('bg-primary', 'text-white');
+                    mainBodyBtn.classList.add('bg-gray-100', 'text-gray-700');
+                    mainBodyBtn.innerHTML = '<i class="fa fa-square-o mr-1"></i> 主体';
+                } else {
+                    // 选择主体，取消内胆选择
+                    currentPrefix = '主体';
+                    mainBodyBtn.classList.remove('bg-gray-100', 'text-gray-700');
+                    mainBodyBtn.classList.add('bg-primary', 'text-white');
+                    mainBodyBtn.innerHTML = '<i class="fa fa-check-square-o mr-1"></i> 主体';
+                    
+                    // 取消内胆选择
+                    innerLiningBtn.classList.remove('bg-primary', 'text-white');
+                    innerLiningBtn.classList.add('bg-gray-100', 'text-gray-700');
+                    innerLiningBtn.innerHTML = '<i class="fa fa-square-o mr-1"></i> 内胆';
+                }
+                updateResult();
+            });
+            
+            innerLiningBtn.addEventListener('click', () => {
+                // 切换内胆按钮状态
+                if (currentPrefix === '内胆') {
+                    // 如果已选中内胆，则取消选择
+                    currentPrefix = '';
+                    innerLiningBtn.classList.remove('bg-primary', 'text-white');
+                    innerLiningBtn.classList.add('bg-gray-100', 'text-gray-700');
+                    innerLiningBtn.innerHTML = '<i class="fa fa-square-o mr-1"></i> 内胆';
+                } else {
+                    // 选择内胆，取消主体选择
+                    currentPrefix = '内胆';
+                    innerLiningBtn.classList.remove('bg-gray-100', 'text-gray-700');
+                    innerLiningBtn.classList.add('bg-primary', 'text-white');
+                    innerLiningBtn.innerHTML = '<i class="fa fa-check-square-o mr-1"></i> 内胆';
+                    
+                    // 取消主体选择
+                    mainBodyBtn.classList.remove('bg-primary', 'text-white');
+                    mainBodyBtn.classList.add('bg-gray-100', 'text-gray-700');
+                    mainBodyBtn.innerHTML = '<i class="fa fa-square-o mr-1"></i> 主体';
+                }
+                updateResult();
+            });
+        }
+        
         // 绑定事件
         function bindEvents() {
             // 复制按钮
@@ -714,6 +783,9 @@
             window.addEventListener('resize', () => {
                 adjustTextareaHeight();
             });
+            
+            // 绑定前缀按钮事件
+            bindPrefixButtons();
         }
     </script>
 </body>
