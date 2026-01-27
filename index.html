@@ -114,7 +114,7 @@
     <div class="container mx-auto px-4 py-5 max-w-[100%] lg:max-w-[95%] xl:max-w-[90%]">
         <!-- 标题区域 -->
         <header class="text-center mb-4">
-            <h1 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800 mb-2">定案词条点选系统V0.51</h1>
+            <h1 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800 mb-2">定案词条点选系统V0.52</h1>
             <p class="text-neutral text-sm">蒸烫湿烫和衬衣的袖线西裤的裤线不用写了</p>
         </header>
         
@@ -141,10 +141,9 @@
                 
                 <!-- 蓝绿色系羽绒预设按钮 -->
                 <button class="teal-preset-btn" data-preset="yu40">羽绒40-测</button>
-                <button class="teal-preset-btn" data-preset="yu30">羽绒30-测</button>
-                <button class="teal-preset-btn" data-preset="down45">羽绒服45℃</button>
-                <button class="teal-preset-btn" data-preset="down40">羽绒服40℃</button>
-                <button class="teal-preset-btn" data-preset="down30">羽绒服30℃</button>
+                <button class="teal-preset-btn" data-preset="yu30-ju">羽绒30-局部涂层</button>
+                <button class="teal-preset-btn" data-preset="yu30-zheng">羽绒30-压胶/整体涂层</button>
+
                 <button class="preset-btn" data-preset="dabo60">达播氧漂</button>
                 
                 <!-- 快速文本预设按钮 -->
@@ -359,11 +358,12 @@
                     { value: "烘干3#", fullName: "烘干机3号程序" },                    
                     { value: "烘干7#", fullName: "烘干机7号程序" },
                     { value: "烘干8#", fullName: "烘干机8号程序" },
-                    { value: "烘干9#", fullName: "烘干机9号程序" },
-                    { value: "羽绒1→挂→6", fullName: "烘干机1号程序→烘房悬挂→烘干机6号程序反烘，如有皱褶蒸烫" },
+                    { value: "烘干9#", fullName: "烘干机9号程序" },                    
                     { value: "羽绒3→1", fullName: "烘干机3号程序→烘干机1号程序反烘，如有皱褶蒸烫" },
                     { value: "羽绒3→10测", fullName: "【测试】烘干机3号程序→烘干机10号程序反烘，如有皱褶蒸烫" },
                     { value: "羽绒10-测", fullName: "【测试】滚筒10号程序（55℃，50min）→干燥员检查是否结团，若结团→②滚筒1号程序(50℃，30min)→干燥员检查是否结团，若结团→③滚筒1号程序(50℃，30min)，如有褶皱熨烫" },
+                    { value: "压胶/整体涂层：人像→挂→6", fullName: "人像机吹干15min→烘房悬挂→滚筒6号程序拍打" },
+                    { value: "局部涂层：羽绒1→挂→6", fullName: "烘干机1号程序→烘房悬挂→烘干机6号程序反烘，如有皱褶蒸烫" }
                 ]
             },
             {
@@ -407,10 +407,8 @@
             "guiji": ["细网袋", "硅基"],
             "dabo60": ["60℃氧漂", "烘干1#"],
             "yu40": ["保护拉绳", "保护拉链", "40羽绒测","翻","羽绒3→10测"],
-            "yu30": ["保护拉绳", "保护拉链", "30羽绒测","翻","羽绒1→挂→6"],
-            "down45": ["保护拉绳", "保护拉链", "1号预涂", "45℃羽绒服洗", "羽绒3→10测"],
-            "down40": ["保护拉绳", "保护拉链", "1号预涂", "40℃羽绒服洗", "羽绒3→10测"],
-            "down30": ["保护拉绳", "保护拉链", "1号预涂", "30℃羽绒服洗", "羽绒1→挂→6"],
+            "yu30-ju": ["保护拉绳", "保护拉链", "30羽绒测","翻","局部涂层：羽绒1→挂→6"],
+            "yu30-zheng": ["保护拉绳", "保护拉链", "30羽绒测","翻","压胶/整体涂层：人像→挂→6"],            
             "bucaoB": ["布草常规18","烘干7#"],
             "bucaoC": ["布草常规18","烘干8#"],
             "bucaoZ": ["布草常规18","烘干9#"],
