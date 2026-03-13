@@ -114,7 +114,7 @@
     <div class="container mx-auto px-4 py-5 max-w-[100%] lg:max-w-[95%] xl:max-w-[90%]">
         <!-- 标题区域 -->
         <header class="text-center mb-4">
-            <h1 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800 mb-2">定案词条点选系统V0.55</h1>
+            <h1 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800 mb-2">定案词条点选系统V0.56</h1>
             <p class="text-neutral text-sm">蒸烫湿烫和衬衣的袖线西裤的裤线不用写了</p>
         </header>
         
@@ -140,10 +140,10 @@
                 <button class="yellow-preset-btn" data-preset="guiji">硅基</button>
                 
                 <!-- 蓝绿色系羽绒预设按钮 -->
-                <button class="teal-preset-btn" data-preset="yu40">羽绒40-测</button>
-                <button class="teal-preset-btn" data-preset="yu30-ju">羽绒30-局部涂层</button>
-                <button class="teal-preset-btn" data-preset="yu30-zheng">羽绒30-压胶/整体涂层</button>
-
+                <button class="teal-preset-btn" data-preset="yu40">羽绒40</button>
+                <button class="teal-preset-btn" data-preset="yu40-pao">羽绒40浸泡</button>
+                <button class="teal-preset-btn" data-preset="yu30">羽绒30</button>
+                <button class="teal-preset-btn" data-preset="yu-shi">羽绒湿洗</button>
                 <button class="preset-btn" data-preset="dabo60">达播氧漂</button>
                 
                 <!-- 快速文本预设按钮 -->
@@ -324,6 +324,7 @@
                     { value: "40羽绒", fullName: "工业水洗机3号程序（羽绒服40℃）", isExclusive: true, specialStyle: "teal-border" },
                     { value: "30羽绒",  fullName: "工业水洗机16号程序", isExclusive: true, specialStyle: "teal-border"  },
                     { value: "湿洗羽绒",  fullName: "伊莱克斯湿洗机-羽绒*", isExclusive: true, specialStyle: "teal-border"  },
+                    { value: "羽绒浸泡",  fullName: "工业水洗机2号程序（15kg）", isExclusive: true, specialStyle: "teal-border"  },
                     { value: "湿洗3号", fullName: "伊莱克斯湿洗机-真丝套件程序洗涤", isExclusive: true },
                     { value: "湿洗5号", fullName: "伊莱克斯湿洗机5号程序（蚕丝芯）", isExclusive: true },
                     { value: "四氯乙烯", fullName: "四氯乙烯1号程序", specialStyle: "dark-yellow-border", isExclusive: true },
@@ -368,7 +369,7 @@
                     { value: "烘干9#", fullName: "烘干机9号程序" },                    
                     { value: "羽绒3→1", fullName: "烘干机3号程序→烘干机1号程序反烘，如有皱褶蒸烫" },
                     { value: "羽绒3→10测", fullName: "【测试】烘干机3号程序→烘干机10号程序反烘，如有皱褶蒸烫" },
-                    { value: "羽绒10-测", fullName: "【测试】滚筒10号程序（55℃，50min）→干燥员检查是否结团，若结团→②滚筒1号程序(50℃，30min)→干燥员检查是否结团，若结团→③滚筒1号程序(50℃，30min)，如有褶皱熨烫" },
+                    { value: "挂→烘2", fullName: "烘房开启悬挂2h→烘干机2号程序" },
                     { value: "压胶/整体涂层：人像→挂→6", fullName: "人像机吹干15min→烘房悬挂→滚筒6号程序拍打，如有皱褶蒸烫" },
                     { value: "局部涂层：羽绒1→挂→6", fullName: "烘干机1号程序→烘房悬挂→烘干机6号程序反烘，如有皱褶蒸烫" }
                 ]
@@ -414,9 +415,10 @@
             "tanqing": ["水溶性污渍", "翻面", "细网袋", "碳氢"],
             "guiji": ["细网袋", "硅基"],
             "dabo60": ["60℃氧漂", "烘干1#"],
-            "yu40": ["保护拉绳", "保护拉链", "40羽绒","翻","羽绒3→10测"],
-            "yu30-ju": ["保护拉绳", "保护拉链", "30羽绒","翻","局部涂层：羽绒1→挂→6"],
-            "yu30-zheng": ["保护拉绳", "保护拉链", "30羽绒","翻","压胶/整体涂层：人像→挂→6"],            
+            "yu40-pao": ["保护拉绳", "保护拉链", "羽绒浸泡","翻","烘干3#"],
+            "yu40": ["保护拉绳", "保护拉链", "40羽绒","翻","烘干3#"],
+            "yu30": ["保护拉绳", "保护拉链", "30羽绒","翻","挂→烘2"],
+            "yu-shi": ["保护拉绳", "保护拉链", "湿洗羽绒","翻","室温悬挂"],            
             "bucaoB": ["布草常规18","烘干7#"],
             "bucaoC": ["布草常规18","烘干8#"],
             "bucaoZ": ["布草常规18","烘干9#"],
