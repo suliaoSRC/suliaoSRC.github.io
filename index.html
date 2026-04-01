@@ -4,122 +4,546 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>定案词条点选系统</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.tailwindcss.com?plugins=forms" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    
-    <!-- Tailwind配置 -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#3B82F6',
-                        secondary: '#10B981',
-                        neutral: '#64748B',
-                        yellow: {
-                            light: '#FEF3C7',
-                            DEFAULT: '#EAB308',
-                            dark: '#B45309'
-                        },
-                        // 新增蓝绿色系
-                        teal: {
-                            light: '#CCFBF1',
-                            DEFAULT: '#14B8A6',
-                            dark: '#0F766E'
-                        }
-                    },
-                    fontFamily: {
-                        inter: ['Inter', 'system-ui', 'sans-serif'],
-                    },
-                }
+    <style>
+        /* 基础样式重置和全局设置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #F9FAFB;
+            color: #1F2937;
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+        
+        /* 容器和布局 */
+        .container {
+            width: 100%;
+            max-width: 90%;
+            margin: 0 auto;
+            padding: 1.25rem;
+        }
+        
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 95%;
             }
         }
-    </script>
-    
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .btn-hover {
-                @apply transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5;
+        
+        @media (min-width: 1280px) {
+            .container {
+                max-width: 90%;
             }
-            .category-card {
-                @apply bg-white rounded-xl shadow-md p-3 mb-3 transition-all duration-300 hover:shadow-lg;
+        }
+        
+        /* 标题样式 */
+        h1 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #1F2937;
+        }
+        
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+        
+        h3 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #4B5563;
+        }
+        
+        /* 卡片样式 */
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 0.75rem;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .column1-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .column1-card:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 按钮样式 */
+        .btn {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #D1D5DB;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #4B5563;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn:hover {
+            border-color: #3B82F6;
+            transform: translateY(-0.5px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .btn-primary {
+            background-color: #3B82F6;
+            color: white;
+            border-color: #3B82F6;
+        }
+        
+        .btn-primary:hover {
+            background-color: rgba(59, 130, 246, 0.9);
+            border-color: rgba(59, 130, 246, 0.9);
+        }
+        
+        .btn-secondary {
+            background-color: #E5E7EB;
+            color: #4B5563;
+            border-color: #D1D5DB;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #D1D5DB;
+        }
+        
+        .preset-btn {
+            background-color: #EFF6FF;
+            color: #3B82F6;
+            border-color: #DBEAFE;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+        }
+        
+        .preset-btn:hover {
+            background-color: #DBEAFE;
+            transform: translateY(-0.5px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .yellow-preset-btn {
+            background-color: #FEF3C7;
+            color: #B45309;
+            border-color: #FDE68A;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+        }
+        
+        .yellow-preset-btn:hover {
+            background-color: #FDE68A;
+            transform: translateY(-0.5px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .teal-preset-btn {
+            background-color: #CCFBF1;
+            color: #0F766E;
+            border-color: #99F6E4;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 0.875rem;
+        }
+        
+        .teal-preset-btn:hover {
+            background-color: #99F6E4;
+            transform: translateY(-0.5px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .process-btn {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #D1D5DB;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #4B5563;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .process-btn:hover {
+            border-color: #3B82F6;
+            transform: translateY(-0.5px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .process-btn.selected-btn {
+            background-color: #3B82F6;
+            color: white;
+            border-color: #3B82F6;
+        }
+        
+        .teal-border-btn {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #14B8A6;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #0F766E;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .teal-border-btn:hover {
+            border-color: #0F766E;
+            transform: translateY(-0.5px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .teal-border-btn.selected-btn {
+            background-color: #14B8A6;
+            color: white;
+            border-color: #14B8A6;
+        }
+        
+        .dark-yellow-border-btn {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #B45309;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #B45309;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .dark-yellow-border-btn:hover {
+            border-color: #EAB308;
+            transform: translateY(-0.5px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark-yellow-border-btn.selected-btn {
+            background-color: #EAB308;
+            color: white;
+            border-color: #EAB308;
+        }
+        
+        .stain-btn {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #FCD34D;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #92400E;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .stain-btn:hover {
+            border-color: #FBBF24;
+            transform: translateY(-0.5px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stain-btn.selected-btn {
+            background-color: #F97316;
+            color: white;
+            border-color: #F97316;
+        }
+        
+        .dry-wet-btn {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #D8B4FE;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #7E22CE;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .dry-wet-btn:hover {
+            border-color: #A855F7;
+            transform: translateY(-0.5px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dry-wet-btn.selected-btn {
+            background-color: #A855F7;
+            color: white;
+            border-color: #A855F7;
+        }
+        
+        .wet-dry-btn {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #BFDBFE;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #3B82F6;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .wet-dry-btn:hover {
+            border-color: #3B82F6;
+            transform: translateY(-0.5px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .wet-dry-btn.selected-btn {
+            background-color: #3B82F6;
+            color: white;
+            border-color: #3B82F6;
+        }
+        
+        /* 表单元素 */
+        .textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #D1D5DB;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #1F2937;
+            background-color: white;
+            resize: none;
+            min-height: 90px;
+            max-height: 400px;
+            transition: all 0.2s ease;
+        }
+        
+        .textarea:focus {
+            outline: none;
+            border-color: #3B82F6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+        }
+        
+        /* 布局网格 */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        @media (min-width: 1024px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
             }
-            .column1-card {
-                @apply bg-white rounded-xl shadow-md p-2 mb-2 transition-all duration-300 hover:shadow-lg;
+        }
+        
+        /* 辅助类 */
+        .text-center {
+            text-align: center;
+        }
+        
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+        
+        .mb-6 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .mt-2 {
+            margin-top: 0.5rem;
+        }
+        
+        .mt-6 {
+            margin-top: 1.5rem;
+        }
+        
+        .p-3 {
+            padding: 0.75rem;
+        }
+        
+        .flex {
+            display: flex;
+        }
+        
+        .flex-wrap {
+            flex-wrap: wrap;
+        }
+        
+        .items-center {
+            align-items: center;
+        }
+        
+        .justify-center {
+            justify-content: center;
+        }
+        
+        .justify-between {
+            justify-content: space-between;
+        }
+        
+        .gap-2 {
+            gap: 0.5rem;
+        }
+        
+        .gap-4 {
+            gap: 1rem;
+        }
+        
+        .text-sm {
+            font-size: 0.875rem;
+        }
+        
+        .text-xs {
+            font-size: 0.75rem;
+        }
+        
+        .text-neutral {
+            color: #64748B;
+        }
+        
+        .font-semibold {
+            font-weight: 600;
+        }
+        
+        .font-bold {
+            font-weight: 700;
+        }
+        
+        .flex-1 {
+            flex: 1;
+        }
+        
+        .sticky {
+            position: sticky;
+            top: 1rem;
+        }
+        
+        /* 图标样式 */
+        .icon {
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.5rem;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        .icon-list-alt {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%233B82F6'%3E%3Cpath d='M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3ZM19 19H5V5H19V19ZM7 10H17V12H7V10ZM7 7H17V9H7V7ZM7 13H14V15H7V13Z'/%3E%3C/svg%3E");
+        }
+        
+        .icon-copy {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M16 1H4C2.89543 1 2 1.89543 2 3V17H4V3H16V1ZM19 5H8C6.89543 5 6 5.89543 6 7V21C6 22.1046 6.89543 23 8 23H19C20.1046 23 21 22.1046 21 21V7C21 5.89543 20.1046 5 19 5ZM19 21H8V7H19V21Z'/%3E%3C/svg%3E");
+        }
+        
+        .icon-trash {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234B5563'%3E%3Cpath d='M6 19C6 20.1046 6.89543 21 8 21H16C17.1046 21 18 20.1046 18 19V7H6V19ZM8 21V7H16V21H8ZM15.5 4L14.5 3H9.5L8.5 4H5V6H19V4H15.5Z'/%3E%3C/svg%3E");
+        }
+        
+        .icon-exchange {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23A855F7'%3E%3Cpath d='M8.70711 10.2929L12 6.99995L15.2929 10.2929L16.7071 8.87871L12 4.17157L7.29289 8.87871L8.70711 10.2929ZM15.2929 13.7071L12 17L8.70711 13.7071L7.29289 15.1213L12 19.8284L16.7071 15.1213L15.2929 13.7071Z'/%3E%3C/svg%3E");
+        }
+        
+        .icon-exchange-blue {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%233B82F6'%3E%3Cpath d='M8.70711 10.2929L12 6.99995L15.2929 10.2929L16.7071 8.87871L12 4.17157L7.29289 8.87871L8.70711 10.2929ZM15.2929 13.7071L12 17L8.70711 13.7071L7.29289 15.1213L12 19.8284L16.7071 15.1213L15.2929 13.7071Z'/%3E%3C/svg%3E");
+        }
+        
+        .icon-info-circle {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23F97316'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z'/%3E%3C/svg%3E");
+        }
+        
+        .icon-square-o {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3ZM19 19H5V5H19V19Z'/%3E%3C/svg%3E");
+        }
+        
+        .icon-check-square-o {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3ZM19 19H5V5H19V19ZM17.9982 9L12 14.9982L6.00177 9H17.9982Z'/%3E%3C/svg%3E");
+        }
+        
+        .icon-square-o-gray {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234B5563'%3E%3Cpath d='M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3ZM19 19H5V5H19V19Z'/%3E%3C/svg%3E");
+        }
+        
+        .icon-check-square-o-gray {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234B5563'%3E%3Cpath d='M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3ZM19 19H5V5H19V19ZM17.9982 9L12 14.9982L6.00177 9H17.9982Z'/%3E%3C/svg%3E");
+        }
+        
+        /* 动画 */
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
             }
-            .selected-btn {
-                @apply bg-primary text-white border-primary;
+            50% {
+                opacity: 0.5;
             }
-            .preset-btn {
-                @apply bg-blue-100 hover:bg-blue-200 text-primary py-2 px-4 rounded-lg font-medium btn-hover text-sm;
-            }
-            .yellow-preset-btn {
-                @apply bg-yellow-light hover:bg-yellow text-yellow-dark py-2 px-4 rounded-lg font-medium btn-hover text-sm;
-            }
-            /* 新增蓝绿色预设按钮样式 */
-            .teal-preset-btn {
-                @apply bg-teal-light hover:bg-teal text-teal-dark py-2 px-4 rounded-lg font-medium btn-hover text-sm;
-            }
-            .process-btn {
-                @apply px-3 py-2 border border-gray-300 rounded-lg text-sm hover:border-primary btn-hover transition-all duration-200;
-            }
-            /* 新增蓝绿色工序按钮样式 */
-            .teal-border-btn {
-                @apply px-3 py-2 border border-teal rounded-lg text-sm hover:border-teal-dark btn-hover transition-all duration-200 text-teal-dark;
-            }
-            .teal-border-btn.selected-btn {
-                @apply bg-teal text-white border-teal;
-            }
-            .dark-yellow-border-btn {
-                @apply px-3 py-2 border border-yellow-dark rounded-lg text-sm hover:border-yellow btn-hover transition-all duration-200;
-            }
-            .dark-yellow-border-btn.selected-btn {
-                @apply bg-yellow text-white border-yellow;
-            }
-            .adaptive-textarea {
-                @apply w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all resize-none text-base;
-                min-height: 90px;
-                max-height: 400px;
-                line-height: 1.5;
-            }
-            .stain-btn {
-                @apply process-btn border-orange-200 text-orange-800 hover:border-orange-400;
-            }
-            .stain-btn.selected-btn {
-                @apply bg-orange-500 text-white border-orange-500;
-            }
-            /* 编辑区域高亮样式 */
-            .edited-highlight {
-                @apply bg-yellow-50 border border-yellow-200 animate-pulse;
-            }
-            /* 新增干转水/水转干按钮样式 */
-            .dry-wet-btn {
-                @apply px-3 py-2 border border-purple-300 rounded-lg text-sm hover:border-purple-500 btn-hover transition-all duration-200 text-purple-700;
-            }
-            .dry-wet-btn.selected-btn {
-                @apply bg-purple-500 text-white border-purple-500;
-            }
-            .wet-dry-btn {
-                @apply px-3 py-2 border border-blue-300 rounded-lg text-sm hover:border-blue-500 btn-hover transition-all duration-200 text-blue-700;
-            }
-            .wet-dry-btn.selected-btn {
-                @apply bg-blue-500 text-white border-blue-500;
+        }
+        
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        /* 高亮样式 */
+        .edited-highlight {
+            background-color: #FFFBEB;
+            border-color: #FDE68A;
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 1023px) {
+            .lg\\:col-span-4 {
+                width: 100%;
             }
         }
     </style>
 </head>
-<body class="bg-gray-50 font-inter text-gray-800 min-h-screen">
+<body>
     <!-- 响应式容器 -->
-    <div class="container mx-auto px-4 py-5 max-w-[100%] lg:max-w-[95%] xl:max-w-[90%]">
+    <div class="container">
         <!-- 标题区域 -->
         <header class="text-center mb-4">
-            <h1 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-800 mb-2">定案词条点选系统V0.58</h1>
+            <h1>定案词条点选系统V0.59</h1>
             <p class="text-neutral text-sm">蒸烫湿烫和衬衣的袖线西裤的裤线不用写了</p>
         </header>
         
         <!-- 预设按钮区域 -->
-        <div class="mb-4 bg-white rounded-xl shadow-md p-3">
+        <div class="card mb-4">
             <h3 class="font-semibold mb-2 text-gray-700 text-sm">快速预设</h3>
             <div class="flex flex-wrap gap-2">
                 <!-- 程序预设按钮 -->
@@ -160,7 +584,7 @@
         </div>
         
         <!-- 主内容区 -->
-        <main class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+        <main class="grid">
             <!-- 左侧第一列：洗前保护、预去渍、部位、柔顺 -->
             <div class="lg:col-span-4 space-y-2"></div>
             
@@ -169,45 +593,45 @@
             
             <!-- 右侧：结果和复制区 -->
             <div class="lg:col-span-4">
-                <div class="category-card sticky top-4 p-3 max-w-[1400px]">
+                <div class="card sticky top-4 p-3 max-w-[1400px]">
                     <h2 class="text-base font-semibold mb-2 flex items-center text-gray-700">
-                        <i class="fa fa-list-alt text-primary mr-2"></i>生成结果（可编辑）
+                        <span class="icon icon-list-alt"></span>生成结果（可编辑）
                     </h2>
                     
                     <div class="mb-2">
-                        <textarea id="resultText" class="adaptive-textarea" placeholder="选择工序后显示文字，您可以直接在此编辑..."></textarea>
+                        <textarea id="resultText" class="textarea" placeholder="选择工序后显示文字，您可以直接在此编辑..."></textarea>
                         <div class="text-right text-xs text-neutral mt-0.5">
                             <span id="charCount">0</span> 字符
                             <!-- 编辑提示 -->
                             <span id="editTip" class="ml-2 hidden text-orange-600">
-                                <i class="fa fa-info-circle mr-0.5"></i>点选新工序将重置编辑内容
+                                <span class="icon icon-info-circle"></span>点选新工序将重置编辑内容
                             </span>
                         </div>
                     </div>
                     
                     <div class="flex gap-2 mb-2">
-                        <button id="copyBtn" class="flex-1 bg-primary hover:bg-primary/90 text-white py-2 px-3 rounded-lg font-medium btn-hover flex items-center justify-center text-sm disabled:opacity-50 disabled:cursor-not-allowed" disabled>
-                            <i class="fa fa-copy mr-1"></i> 复制
+                        <button id="copyBtn" class="flex-1 btn btn-primary" disabled>
+                            <span class="icon icon-copy"></span> 复制
                         </button>
-                        <button id="clearBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 px-3 rounded-lg font-medium btn-hover flex items-center justify-center text-sm disabled:opacity-50 disabled:cursor-not-allowed" disabled>
-                            <i class="fa fa-trash mr-1"></i> 清空
+                        <button id="clearBtn" class="btn btn-secondary" disabled>
+                            <span class="icon icon-trash"></span> 清空
                         </button>
                     </div>
                     
                     <!-- 新增主体/内胆选择按钮 -->
                     <div class="flex gap-2 mb-2">
-                        <button id="mainBodyBtn" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-3 rounded-lg font-medium btn-hover flex items-center justify-center text-sm transition-all duration-200">
-                            <i class="fa fa-square-o mr-1"></i> 主体
+                        <button id="mainBodyBtn" class="flex-1 btn btn-secondary">
+                            <span class="icon icon-square-o-gray"></span> 主体
                         </button>
-                        <button id="innerLiningBtn" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-3 rounded-lg font-medium btn-hover flex items-center justify-center text-sm transition-all duration-200">
-                            <i class="fa fa-square-o mr-1"></i> 内胆
+                        <button id="innerLiningBtn" class="flex-1 btn btn-secondary">
+                            <span class="icon icon-square-o-gray"></span> 内胆
                         </button>
                     </div>
 
                     <!-- 新增干转水区域 -->
                     <div class="mb-2">
                         <h3 class="text-sm font-semibold mb-2 flex items-center text-purple-700">
-                            <i class="fa fa-exchange text-purple-600 mr-1"></i>干转水
+                            <span class="icon icon-exchange"></span>干转水
                         </h3>
                         <div class="flex flex-wrap gap-2">
                             <button class="dry-wet-btn" data-dry-wet="大面积/分散性色渍">大面积/分散性色渍</button>
@@ -222,7 +646,7 @@
                     <!-- 新增水转干区域 -->
                     <div class="mb-2">
                         <h3 class="text-sm font-semibold mb-2 flex items-center text-blue-700">
-                            <i class="fa fa-exchange text-blue-600 mr-1"></i>水转干
+                            <span class="icon icon-exchange-blue"></span>水转干
                         </h3>
                         <div class="flex flex-wrap gap-2">
                             <button class="wet-dry-btn" data-wet-dry="保质保型">保质保型</button>
@@ -484,7 +908,7 @@
                 if (column1Categories.includes(process.category)) {
                     card.className = 'column1-card';
                 } else {
-                    card.className = 'category-card';
+                    card.className = 'card';
                 }
                 card.dataset.category = process.category;
 
@@ -690,14 +1114,14 @@
         function resetPrefixSelection() {
             currentPrefix = '';
             // 重置主体按钮样式
-            mainBodyBtn.classList.remove('bg-primary', 'text-white');
-            mainBodyBtn.classList.add('bg-gray-100', 'text-gray-700');
-            mainBodyBtn.innerHTML = '<i class="fa fa-square-o mr-1"></i> 主体';
+            mainBodyBtn.classList.remove('btn-primary');
+            mainBodyBtn.classList.add('btn-secondary');
+            mainBodyBtn.innerHTML = '<span class="icon icon-square-o-gray"></span> 主体';
             
             // 重置内胆按钮样式
-            innerLiningBtn.classList.remove('bg-primary', 'text-white');
-            innerLiningBtn.classList.add('bg-gray-100', 'text-gray-700');
-            innerLiningBtn.innerHTML = '<i class="fa fa-square-o mr-1"></i> 内胆';
+            innerLiningBtn.classList.remove('btn-primary');
+            innerLiningBtn.classList.add('btn-secondary');
+            innerLiningBtn.innerHTML = '<span class="icon icon-square-o-gray"></span> 内胆';
         }
 
         // 清空所有选择
@@ -857,20 +1281,20 @@
                 if (currentPrefix === '主体') {
                     // 如果已选中主体，则取消选择
                     currentPrefix = '';
-                    mainBodyBtn.classList.remove('bg-primary', 'text-white');
-                    mainBodyBtn.classList.add('bg-gray-100', 'text-gray-700');
-                    mainBodyBtn.innerHTML = '<i class="fa fa-square-o mr-1"></i> 主体';
+                    mainBodyBtn.classList.remove('btn-primary');
+                    mainBodyBtn.classList.add('btn-secondary');
+                    mainBodyBtn.innerHTML = '<span class="icon icon-square-o-gray"></span> 主体';
                 } else {
                     // 选择主体，取消内胆选择
                     currentPrefix = '主体';
-                    mainBodyBtn.classList.remove('bg-gray-100', 'text-gray-700');
-                    mainBodyBtn.classList.add('bg-primary', 'text-white');
-                    mainBodyBtn.innerHTML = '<i class="fa fa-check-square-o mr-1"></i> 主体';
+                    mainBodyBtn.classList.remove('btn-secondary');
+                    mainBodyBtn.classList.add('btn-primary');
+                    mainBodyBtn.innerHTML = '<span class="icon icon-check-square-o"></span> 主体';
                     
                     // 取消内胆选择
-                    innerLiningBtn.classList.remove('bg-primary', 'text-white');
-                    innerLiningBtn.classList.add('bg-gray-100', 'text-gray-700');
-                    innerLiningBtn.innerHTML = '<i class="fa fa-square-o mr-1"></i> 内胆';
+                    innerLiningBtn.classList.remove('btn-primary');
+                    innerLiningBtn.classList.add('btn-secondary');
+                    innerLiningBtn.innerHTML = '<span class="icon icon-square-o-gray"></span> 内胆';
                 }
                 updateResult();
             });
@@ -880,20 +1304,20 @@
                 if (currentPrefix === '内胆') {
                     // 如果已选中内胆，则取消选择
                     currentPrefix = '';
-                    innerLiningBtn.classList.remove('bg-primary', 'text-white');
-                    innerLiningBtn.classList.add('bg-gray-100', 'text-gray-700');
-                    innerLiningBtn.innerHTML = '<i class="fa fa-square-o mr-1"></i> 内胆';
+                    innerLiningBtn.classList.remove('btn-primary');
+                    innerLiningBtn.classList.add('btn-secondary');
+                    innerLiningBtn.innerHTML = '<span class="icon icon-square-o-gray"></span> 内胆';
                 } else {
                     // 选择内胆，取消主体选择
                     currentPrefix = '内胆';
-                    innerLiningBtn.classList.remove('bg-gray-100', 'text-gray-700');
-                    innerLiningBtn.classList.add('bg-primary', 'text-white');
-                    innerLiningBtn.innerHTML = '<i class="fa fa-check-square-o mr-1"></i> 内胆';
+                    innerLiningBtn.classList.remove('btn-secondary');
+                    innerLiningBtn.classList.add('btn-primary');
+                    innerLiningBtn.innerHTML = '<span class="icon icon-check-square-o"></span> 内胆';
                     
                     // 取消主体选择
-                    mainBodyBtn.classList.remove('bg-primary', 'text-white');
-                    mainBodyBtn.classList.add('bg-gray-100', 'text-gray-700');
-                    mainBodyBtn.innerHTML = '<i class="fa fa-square-o mr-1"></i> 主体';
+                    mainBodyBtn.classList.remove('btn-primary');
+                    mainBodyBtn.classList.add('btn-secondary');
+                    mainBodyBtn.innerHTML = '<span class="icon icon-square-o-gray"></span> 主体';
                 }
                 updateResult();
             });
